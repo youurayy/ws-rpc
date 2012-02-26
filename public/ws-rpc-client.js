@@ -3,7 +3,7 @@
 
 (function() {
 
-	function __initWebSocketRPC(WebSocket) {
+	function initWebSocketRPC(WebSocket) {
 	
 		// caller to callee message flow:
 
@@ -212,10 +212,10 @@
 
 
 	if(typeof(module) !== 'undefined')
-		// expose the main object in Node.js
-		module.exports = __initWebSocketRPC;
+		// expose the init function in Node.js
+		module.exports = initWebSocketRPC;
 	else
-		// expose the main object in browser
-		window.WebSocketRPC = __initWebSocketRPC(window.WebSocket);
+		// expose the init function in browser
+		window.InitWebSocketRPC = initWebSocketRPC;
 
 })();
