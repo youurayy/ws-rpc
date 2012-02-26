@@ -83,7 +83,7 @@ wss.on('disconnect', function(client) {
 
 	//myRoom.remove(client); <- not necessary, this is done automatically
 
-	// example: broadcast too all client's rooms
+	// example: broadcast to all client's rooms
 	for(id in client.rooms)
 		client.rooms[id].message('some message', args);
 });
@@ -91,7 +91,7 @@ wss.on('disconnect', function(client) {
 // message all clients connected to the server
 wss.message('some message', args);
 
-// msg all clients in a room
+// message all clients in a room
 myRoom.message('some message', args);
 
 // and don't forget this if you don't want your Node to crash on an error:
@@ -126,18 +126,20 @@ require('ws-rpc').extend(wss);
 
 In your HTML page ([JADE](http://jade-lang.com/) syntax shown):
 
-	!!! 5
-	html
-		head
-			meta(http-equiv='X-UA-Compatible', content='IE=Edge,chrome=1')
-			//if lt IE 8
-				script(src='http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.min.js')
-			script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
-			script(src='/ws-rpc-client.min.js')
-			script(src='/ws-flash.min.js')
-			script(src='/myclientcode.js')
-		body
-			#msg
+```html
+!!! 5
+html
+	head
+		meta(http-equiv='X-UA-Compatible', content='IE=Edge,chrome=1')
+		//if lt IE 8
+			script(src='http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.min.js')
+		script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+		script(src='/ws-rpc-client.min.js')
+		script(src='/ws-flash.min.js')
+		script(src='/myclientcode.js')
+	body
+		#msg
+```
 
 Complete example with the Flash client shim support (for full usage and options please see [ws-flash-client](https://github.com/ypocat/ws-flash-client)):
 
