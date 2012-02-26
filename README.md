@@ -134,8 +134,8 @@ $(function() {
 		// create the client (will use WebSocket object on the background)
 		// param1: url
 		// param2 (optional): protocols, see http://dev.w3.org/html5/websockets/#websocket
-		// param3 (optional): connection timeout in ms (default 4s), set to -1 to disable auto-reconnect
-		// param4 (optional): reconnection wait timeout (default 1s)
+		// param3 (optional): connection timeout in ms (default 4s), use -1 to disable auto-reconnect
+		// param4 (optional): reconnection wait timeout in ms (default 1s)
 		var ws = new WebSocketRPC('ws://' + window.location.host + '/');
 		
 		// handle a message from the server
