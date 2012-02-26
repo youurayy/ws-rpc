@@ -59,7 +59,7 @@
 				// clear the connect timeout, so that it won't disconnect us
 				this.__clearConnectTimeout();
 			});
-		
+			
 			this.on('close', function() {
 			
 				if(this.socket) {
@@ -78,6 +78,13 @@
 							t.connect();
 					}, t.reconnDelay);
 				}
+			});
+			
+			// TEMPORARY FIX for https://github.com/einaros/ws/issues/31
+
+			this.on('error', function(e) {
+				if(typeof(module) !== 'undefined' && e.message && e.message.indexOf('ECONNREFUSED') != -1)
+					this.emit('close');
 			});
 
 			this.connect();
