@@ -1,0 +1,26 @@
+{
+	"author": "Juraj Vitko (@ypocat)",
+	"name": "ws-rpc",
+	"description": "lightweight RPC support for the ws WebSocket server",
+	"keywords": [ "websockets", "websocket", "connect", "middleware", "express", "rpc" ],
+	"version": "0.0.1",
+	"homepage": "http://github.com/ypocat/ws-rpc",
+	"repository": {
+		"type": "git",
+		"url": "git://github.com/ypocat/ws-rpc.git"
+	},
+	"main": "./lib/ws-rpc.js",
+	"directories": {
+		"lib": "./lib"
+	},
+	"engines": {
+		"node": ">= 0.6.0"
+	},
+	"dependencies": {
+	},
+	"devDependencies": {
+	},
+	"licenses": [
+		{  "type" : "BSD New", "url" : "https://raw.github.com/ypocat/ws-flash-client/master/LICENSE" }
+	]
+}
