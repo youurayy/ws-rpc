@@ -20,8 +20,8 @@ Notes:
 ```js
 var prod = process.env.NODE_ENV === 'production';
 var app = require('express').createServer();
-var wss = new (require('ws').Server)({ server: app });
-var wsrpc = require('ws-rpc').extend(wss);
+var ws = require('ws-rpc').extend(require('ws'));
+var wss = new ws.Server({ server: app });
 var wsflash = require('ws-flash-client');
 require('policyfile').createServer().listen(prod ? 843 : 10843, app);
 
@@ -30,7 +30,7 @@ app.configure(function() {
 	// ...
 	
 	// configure the ws-rpc middleware:
-	app.use(wsrpc.middleware(express));
+	app.use(wss.middleware(express));
 	
 	// configure the ws-flash-client middleware:
 	app.use(wsflash.middleware(express));

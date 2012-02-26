@@ -3,7 +3,7 @@
 	"name": "ws-rpc",
 	"description": "lightweight RPC support for the ws WebSocket server",
 	"keywords": [ "websockets", "websocket", "connect", "middleware", "express", "rpc" ],
-	"version": "0.0.1",
+	"version": "0.0.2",
 	"homepage": "http://github.com/ypocat/ws-rpc",
 	"repository": {
 		"type": "git",
