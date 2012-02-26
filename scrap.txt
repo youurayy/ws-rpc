@@ -1,0 +1,19 @@
+
+Also, if you want to intercept the raw string messages and do your own handling in some cases, you can leave out the `require('ws-rpc').extend(wss);` line above, and do the following:
+
+```js
+wss.on('connection', function(client) { // notice: "connection" vs "connect"
+	client.on('message', function(data, flags) {
+		if(is_my_message(data)) {
+			// handle the raw message here
+			// ...
+			// notify the RPC extension that this message was already handled
+			flags.handled = true;
+		}
+		// otherwise the message will be handled as RPC
+	});
+});
+
+// only setup the RPC extension after the above
+require('ws-rpc').extend(wss);
+```

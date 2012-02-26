@@ -103,25 +103,6 @@ wss.on('error', function(e, client) {
 
 Binary messages are not handled by the RPC extension, so you can handle them separately using the classic `ws` API.
 
-Also, if you want to intercept the raw string messages and do your own handling in some cases, you can leave out the `require('ws-rpc').extend(wss);` line above, and do the following:
-
-```js
-wss.on('connection', function(client) { // notice: "connection" vs "connect"
-	client.on('message', function(data, flags) {
-		if(is_my_message(data)) {
-			// handle the raw message here
-			// ...
-			// notify the RPC extension that this message was already handled
-			flags.handled = true;
-		}
-		// otherwise the message will be handled as RPC
-	});
-});
-
-// only setup the RPC extension after the above
-require('ws-rpc').extend(wss);
-```
-
 ### Browser
 
 In your HTML page ([JADE](http://jade-lang.com/) syntax shown):
@@ -147,6 +128,8 @@ $(function() {
 	$.wsFlashClientInit({}, function(err) {
 		if(err)
 			return log('no websocket support');
+			
+		var WebSocketRPC = InitWebSocketRPC(WebSocket);
 
 		// create the client (will use WebSocket object on the background)
 		// param1: url
@@ -217,11 +200,74 @@ Usage without `ws-flash-client`:
 
 ```js
 
+var WebSocketRPC = InitWebSocketRPC(WebSocket);
 var ws = new WebSocketRPC('ws://' + window.location.host + '/');
 
 // ..and the same operations as above..
 
 ```
+
+### Using the WebSocket client from Node.js
+
+```js
+var ws = require('ws-rpc').extend(require('ws'));
+var wsc = new ws.RPCWebSocket('ws://127.0.0.1:1144/');
+
+wsc.on('message 1', function(arg1, arg2, cb) {
+	log('message 1: ' + arg1 + ', ' + arg2);
+	cb(null, 'message1 response from client', 'arg2');
+});
+
+// etc.
+```
+
+### Example
+
+Find the [example app here](https://github.com/ypocat/ws-rpc/tree/master/example), or installed in `node_modules/ws-rpc/example`.
+
+	cd example
+	npm install
+	node testws
+	
+Then load http://localhost:1144/ in your browsers, and/or open another console and
+
+	cd example
+	node testws-server-client
+
+### Tested with
+
+	├─┬ express@2.5.8 
+	│ ├─┬ connect@1.8.5 
+	│ │ └── formidable@1.0.9 
+	│ ├── mime@1.2.4 
+	│ ├── mkdirp@0.3.0 
+	│ └── qs@0.4.2 
+	├─┬ jade@0.20.3 
+	│ ├── commander@0.5.2 
+	│ └── mkdirp@0.3.0 
+	├── nib@0.3.2 
+	├── policyfile@0.0.5 
+	├─┬ stylus@0.24.0 
+	│ ├── cssom@0.2.2 
+	│ ├── debug@0.5.0 
+	│ ├── growl@1.4.1 
+	│ └── mkdirp@0.3.0 
+	├─┬ ws@0.4.7 
+	│ ├── commander@0.5.0 
+	│ └── options@0.0.2 
+	├── ws-flash-client@0.0.2
+	└── ws-rpc@0.0.2
+
+### Tested on
+
+* Google Chrome 17 Mac, 16, 17 Win
+* Firefox 7 Mac, 10 Win
+* Internet Explorer 6, 7, 8, 9 on Win XP and Win 7 (Flash)
+* Safari 5.1 Win, 5 Mac
+* Opera 9.8 Win (Flash)
+* Chrome Beta on Android 4.0, Galaxy Nexus
+* Mobile Safari on iOS 5.0.1, iPhone 3GS
+
 
 ### License
 
