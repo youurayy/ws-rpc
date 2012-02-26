@@ -126,20 +126,18 @@ require('ws-rpc').extend(wss);
 
 In your HTML page ([JADE](http://jade-lang.com/) syntax shown):
 
-```html
-!!! 5
-html
-	head
-		meta(http-equiv='X-UA-Compatible', content='IE=Edge,chrome=1')
-		//if lt IE 8
-			script(src='http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.min.js')
-		script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
-		script(src='/ws-rpc-client.min.js')
-		script(src='/ws-flash.min.js')
-		script(src='/myclientcode.js')
-	body
-		#msg
-```
+	!!! 5
+	html
+		head
+			meta(http-equiv='X-UA-Compatible', content='IE=Edge,chrome=1')
+			//if lt IE 8
+				script(src='http://cdnjs.cloudflare.com/ajax/libs/json2/20110223/json2.min.js')
+			script(src='http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js')
+			script(src='/ws-rpc-client.min.js')
+			script(src='/ws-flash.min.js')
+			script(src='/myclientcode.js')
+		body
+			#msg
 
 Complete example with the Flash client shim support (for full usage and options please see [ws-flash-client](https://github.com/ypocat/ws-flash-client)):
 
