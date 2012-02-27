@@ -170,7 +170,7 @@ $(function() {
 		ws.disconnect(true);
 
 		// connected event
-		ws.on('open', function(world) {
+		ws.on('open', function(client) {
 			log('connected');
 			
 			// access the WebSocket if needed:
@@ -178,7 +178,7 @@ $(function() {
 		});
 
 		// disconnected event
-		ws.on('close', function(world) {
+		ws.on('close', function(client) {
 			log('disconnected');
 		});
 		
