@@ -112,11 +112,10 @@ Binary messages are not handled by the RPC extension, so you can handle them sep
 
 For completeness, here's a guide on how to get a free 90-day SSL certificate:
 
-1. Make a subdirectory in your project folder, e.g.: `mkdir https`
+1) Make a subdirectory in your project folder, e.g.: `mkdir https`
 
-2. Create a text file in that directory, e.g.: `www.yourdomain.com.txt`, with the following contents (C= is the [ISO 3166-1 Alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) of your country)
+2) Create a text file in that directory, e.g.: `www.yourdomain.com.txt`, with the following contents (C= is the [ISO 3166-1 Alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) of your country)
 
----
 	[ req ]
 	distinguished_name=req_distinguished_name
 	prompt=no
@@ -128,20 +127,17 @@ For completeness, here's a guide on how to get a free 90-day SSL certificate:
 	O=Company Name
 	CN=yourdomain.com
 	emailAddress=support@yourdomain.com
----
 	
-3. Execute the following commands (the second command is to remove password from your secret-key file):
+3) Execute the following commands (the second command is to remove password from your secret-key file):
 
----
 	openssl genrsa -des3 -out www.yourdomain.com.key.sec 2048
 	openssl rsa -in www.yourdomain.com.key.sec -out www.yourdomain.com.key
 	rm www.yourdomain.com.key.sec
 	openssl req -new -config www.yourdomain.com.txt -key www.yourdomain.com.key -out www.yourdomain.com.csr
----
 
-4. Use the CSR file to request a certificate from a recognized issuer. (You can get a free 90-day free certificate [from here](http://www.instantssl.com/). I'm not affiliated in any way with that site, but it worked for me.)
+4) Use the CSR file to request a certificate from a recognized issuer. (You can get a free 90-day free certificate [from here](http://www.instantssl.com/). I'm not affiliated in any way with that site, but it worked for me.)
 
-5. After verification through your domain's contact email address, you will obtain a CRT file from the issuer.  Place it along with the KEY file you generated above in the `https` directory.
+5) After verification through your domain's contact email address, you will obtain a CRT file from the issuer.  Place it along with the KEY file you generated above in the `https` directory.
 
 Then configure your server as follows:
 
