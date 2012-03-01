@@ -132,10 +132,12 @@ For completeness, here's a guide on how to get a free 90-day SSL certificate:
 	
 3. Execute the following commands (the second command is to remove password from your secret-key file):
 
+---
 	openssl genrsa -des3 -out www.yourdomain.com.key.sec 2048
 	openssl rsa -in www.yourdomain.com.key.sec -out www.yourdomain.com.key
 	rm www.yourdomain.com.key.sec
 	openssl req -new -config www.yourdomain.com.txt -key www.yourdomain.com.key -out www.yourdomain.com.csr
+---
 
 4. Use the CSR file to request a certificate from a recognized issuer. (You can get a free 90-day free certificate [from here](http://www.instantssl.com/). I'm not affiliated in any way with that site, but it worked for me.)
 
