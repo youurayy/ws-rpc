@@ -1,5 +1,9 @@
 # ws-rpc: lightweight RPC support for the [ws](https://github.com/einaros/ws) WebSocket server
 
+### Important
+
+For increased reliability, it is suggested to use the WebSocket protocol over encrypted connections only. Some proxy servers intervene in the unencrypted form of the protocol in a way which prevents it from operation. This is being addressed by "masking" in newer versions of the protocol, however too many older versions are already in the wild. See the second code example on this page on how to configure HTTPS support in your Node.
+
 ### Server
 
 Install dependencies:
@@ -10,7 +14,7 @@ Install dependencies:
 	npm install ws-flash-client
 	npm install policyfile
 
-##### Complete example with Express, ws, and the Flash client shim support:
+##### Example with Express, ws, and the Flash client shim support (see below for HTTPS):
 
 Notes:
 
@@ -102,6 +106,63 @@ wss.on('error', function(e, client) {
 ```
 
 Binary messages are not handled by the RPC extension, so you can handle them separately using the classic `ws` API.
+
+
+##### The above example, but with HTTP + HTTPS support
+
+For completeness, here's a guide on how to get a free 90-day SSL certificate:
+
+1. Make a subdirectory in your project folder, e.g.: `mkdir https`
+
+2. Create a text file in that directory, e.g.: `www.yourdomain.com.txt`, with the following contents (C= is the [ISO 3166-1 Alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) of your country)
+
+	[ req ]
+	distinguished_name=req_distinguished_name
+	prompt=no
+
+	[ req_distinguished_name ]
+	C=US
+	ST=State or County or Shire
+	L=City
+	O=Company Name
+	CN=yourdomain.com
+	emailAddress=support@yourdomain.com
+	
+3. Execute the following commands (the second command is to remove password from your secret-key file):
+
+	openssl genrsa -des3 -out www.yourdomain.com.key.sec 2048
+	openssl rsa -in www.yourdomain.com.key.sec -out www.yourdomain.com.key
+	rm www.yourdomain.com.key.sec
+	openssl req -new -config www.yourdomain.com.txt -key www.yourdomain.com.key -out www.yourdomain.com.csr
+
+4. Use the CSR file to request a certificate from a recognized issuer. (You can get a free 90-day free certificate [from here](http://www.instantssl.com/). I'm not affiliated in any way with that site, but it worked for me.)
+
+5. After verification through your domain's contact email address, you will obtain a CRT file from the issuer.  Place it along with the KEY file you generated above in the `https` directory.
+
+Then configure your server as follows:
+
+```js
+var prod = process.env.NODE_ENV === 'production';
+var app = require('express').createServer();
+var ws = require('ws-rpc').extend(require('ws'));
+var wsflash = require('ws-flash-client');
+require('policyfile').createServer().listen(prod ? 843 : 10843, app);
+
+var httpsOptions = {
+	key: fs.readFileSync('https/yourdomain.key'),
+	cert: fs.readFileSync('https/yourdomain.crt')
+};
+
+var httpServer = http.createServer(app.handle.bind(app)).listen(port);
+var httpsServer = https.createServer(httpsOptions, app.handle.bind(app))
+    .listen(httpsPort);
+
+var wss = new ws.Server({ server: new ws.ServerHub([ httpServer, httpsServer ]) });
+
+app.configure(function() {
+	// continue as in the above example
+	// ...
+```
 
 ### Browser
 
