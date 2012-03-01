@@ -116,6 +116,7 @@ For completeness, here's a guide on how to get a free 90-day SSL certificate:
 
 2. Create a text file in that directory, e.g.: `www.yourdomain.com.txt`, with the following contents (C= is the [ISO 3166-1 Alpha-2 code](http://en.wikipedia.org/wiki/ISO_3166-1#Current_codes) of your country)
 
+
 	[ req ]
 	distinguished_name=req_distinguished_name
 	prompt=no
@@ -127,6 +128,7 @@ For completeness, here's a guide on how to get a free 90-day SSL certificate:
 	O=Company Name
 	CN=yourdomain.com
 	emailAddress=support@yourdomain.com
+
 	
 3. Execute the following commands (the second command is to remove password from your secret-key file):
 
