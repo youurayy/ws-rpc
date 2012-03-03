@@ -14,7 +14,7 @@ Install dependencies:
 	npm install ws-flash-client
 	npm install policyfile
 
-##### Example with Express, ws, and the Flash client shim support (see below for HTTPS):
+#### Example with Express, ws, and the Flash client shim support (see below for HTTPS):
 
 Notes:
 
@@ -64,7 +64,26 @@ wss.on('connect', function(client) {
 			// ...
 	});
 	
-	//client.on(... <-- not here, see below
+	// Note:
+	// you can hook your listener actions on every client separately, but if you 
+	// have the same handler for every client, you should consider doing it the way
+	// below, as with large number of clients, that will save you a lot of resources.
+	
+	// handle message from a client without a callback
+	client.on('some message', function(args) {
+		
+		// ...
+	});
+	
+	// handle message from a client with a callback
+	client.on('some message', function(args, cb) {
+		
+		// ...
+
+		// call the callback (should use node convention but not mandatory)
+		cb(null, 'ok');
+	});
+	
 });
 
 // handle message from a client without a callback
@@ -108,7 +127,7 @@ wss.on('error', function(e, client) {
 Binary messages are not handled by the RPC extension, so you can handle them separately using the classic `ws` API.
 
 
-##### The above example, but with HTTP + HTTPS support
+#### The above example, but with HTTP + HTTPS support
 
 For completeness, here's a guide on how to get a free 90-day SSL certificate:
 
@@ -149,8 +168,8 @@ var wsflash = require('ws-flash-client');
 require('policyfile').createServer().listen(prod ? 843 : 10843, app);
 
 var httpsOptions = {
-	key: fs.readFileSync('https/yourdomain.key'),
-	cert: fs.readFileSync('https/yourdomain.crt')
+	key: fs.readFileSync('https/www.yourdomain.com.key'),
+	cert: fs.readFileSync('https/www.yourdomain.com.crt')
 };
 
 var httpServer = http.createServer(app.handle.bind(app)).listen(port);

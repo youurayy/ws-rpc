@@ -21,6 +21,6 @@
 	"devDependencies": {
 	},
 	"licenses": [
-		{  "type" : "BSD New", "url" : "https://raw.github.com/ypocat/ws-flash-client/master/LICENSE" }
+		{  "type" : "BSD New", "url" : "https://raw.github.com/ypocat/ws-rpc/master/LICENSE" }
 	]
 }
