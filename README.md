@@ -2,7 +2,7 @@
 
 ### Important
 
-For increased reliability, it is suggested to use the WebSocket protocol over encrypted connections only. Some proxy servers intervene in the unencrypted form of the protocol in a way which prevents it from operation. This is being addressed by "masking" in newer versions of the protocol, however too many older versions are already in the wild. See the second code example on this page on how to configure HTTPS support in your Node.
+For increased reliability, it is suggested to use the WebSocket protocol over encrypted connections only. Some proxy servers handle the unencrypted form of the protocol in a way which prevents it from operation. This is being addressed by "masking" in newer versions of the protocol, however too many older versions are already in the wild. See the second code example on this page on how to configure HTTPS support in your Node.
 
 ### Server
 
