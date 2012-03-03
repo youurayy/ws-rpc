@@ -67,7 +67,7 @@ wss.on('connect', function(client) {
 	// Note:
 	// you can hook your listener actions on every client separately, but if you 
 	// have the same handler for every client, you should consider doing it the way
-	// below, as with large number of clients, that will save you a lot of resources.
+	// below*, as with large number of clients, that will save you a lot of resources.
 	
 	// handle message from a client without a callback
 	client.on('some message', function(args) {
@@ -86,13 +86,13 @@ wss.on('connect', function(client) {
 	
 });
 
-// handle message from a client without a callback
+// *handle message from a client without a callback
 wss.on('some message', function(client, args) {
 
 	// ...
 });
 
-// handle message from a client with a callback
+// *handle message from a client with a callback
 wss.on('some message', function(client, args, cb) {
 
 	// ...
