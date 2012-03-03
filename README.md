@@ -200,7 +200,7 @@ In your HTML page ([JADE](http://jade-lang.com/) syntax shown):
 		body
 			#msg
 
-Complete example with the Flash client shim support (for full usage and options please see [ws-flash-client](https://github.com/ypocat/ws-flash-client)):
+Complete example of the `myclientcode.js` with the Flash client shim support (for full usage and options please see [ws-flash-client](https://github.com/ypocat/ws-flash-client)):
 
 ```js
 $(function() {
