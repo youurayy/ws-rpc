@@ -154,7 +154,7 @@ For completeness, here's a guide on how to get a free 90-day SSL certificate:
 	rm www.yourdomain.com.key.sec
 	openssl req -new -config www.yourdomain.com.txt -key www.yourdomain.com.key -out www.yourdomain.com.csr
 
-4) Use the CSR file to request a certificate from a recognized issuer. (You can get a free 90-day free certificate [from here](http://www.instantssl.com/). I'm not affiliated in any way with that site, but it worked for me.)
+4) Use the CSR file to request a certificate from a recognized issuer. (You can get a free 90-day free certificate [from here](http://www.instantssl.com/). I'm not affiliated in any way with that site, but it worked for me. UPDATE: these certificates display a warning on Firefox: "Error code: sec\_error\_unknown_issuer".)
 
 5) After verification through your domain's contact email address, you will obtain a CRT file from the issuer.  Place it along with the KEY file you generated above in the `https` directory.
 
