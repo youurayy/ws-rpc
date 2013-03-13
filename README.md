@@ -1,5 +1,9 @@
 # ws-rpc: lightweight RPC support for the [ws](https://github.com/einaros/ws) WebSocket server
 
+### News
+
+0.0.6 - Upon disconnection, client now errors (cleans) all pending (client-initiated) callbacks.
+
 ### Important
 
 For increased reliability, it is suggested to use the WebSocket protocol over encrypted connections only. Some proxy servers handle the unencrypted form of the protocol in a way which prevents it from operation. This is being addressed by "masking" in newer versions of the protocol, however too many older versions are already in the wild. See the second code example on this page on how to configure HTTPS support in your Node.
