@@ -9,6 +9,9 @@
 		"type": "git",
 		"url": "git://github.com/ypocat/ws-rpc.git"
 	},
+  "scripts": {
+    "uglify": "uglifyjs public/ws-rpc-client.js > public/ws-rpc-client.min.js"
+  },
 	"main": "./lib/ws-rpc.js",
 	"directories": {
 		"lib": "./lib"
@@ -19,6 +22,7 @@
 	"dependencies": {
 	},
 	"devDependencies": {
+    "uglify-js": "*"
 	},
 	"licenses": [
 		{  "type" : "BSD New", "url" : "https://raw.github.com/ypocat/ws-rpc/master/LICENSE" }
