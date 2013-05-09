@@ -206,7 +206,7 @@
         // randomId: generate cheap random keys to identify pending callbacks
 
         function randomId() {
-            for(var id = '', i = 0, f = Math.floor, r = Math.random; s = String.fromCharCode, i < 8; i++)
+            for(var id = '', i = 0, f = Math.floor, r = Math.random, s = String.fromCharCode; i < 8; i++)
                 id += s(f(r() * 26) + (f(r() * 2) ? 97 : 65)); // bool ? A-Z : a-z
             return id;
         }
